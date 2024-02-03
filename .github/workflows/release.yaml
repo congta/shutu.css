@@ -21,5 +21,5 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-add ~/.ssh/id_rsa
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-          ssh work@www.congta.com "mkdir -p /home/work/app/staticfile/"
-          scp -r cache work@www.congta.com:/home/work/app/staticfile/cache
+          ssh work@www.congta.com "mkdir -p /home/work/app/staticfile/cache"
+          scp -r cache/* work@www.congta.com:/home/work/app/staticfile/cache/
