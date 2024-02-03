@@ -1,0 +1,25 @@
+name: Release Static Files
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Upload Static Files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: upload
+        env: # 设置环境变量
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          eval $(ssh-agent -s)
+          mkdir ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add ~/.ssh/id_rsa
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+          ssh work@www.congta.com "mkdir -p /home/work/app/staticfile/"
+          scp -r cache work@www.congta.com:/home/work/app/staticfile/cache
