@@ -23,3 +23,5 @@ jobs:
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           ssh work@www.congta.com "mkdir -p /home/work/app/staticfile/cache"
           scp -r cache/* work@www.congta.com:/home/work/app/staticfile/cache/
+          ssh work@www.congta.com "mkdir -p /home/work/app/staticfile/css"
+          scp -r css/* work@www.congta.com:/home/work/app/staticfile/css/
